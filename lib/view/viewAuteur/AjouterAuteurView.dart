@@ -10,7 +10,10 @@ class AjouterAuteurView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ajouter un Auteur'),
+        title: Text(
+          'Ajouter un Auteur',
+          style: TextStyle(fontFamily: 'Kanit', fontWeight: FontWeight.bold), // Appliquer Kanit à l'AppBar
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -20,7 +23,11 @@ class AjouterAuteurView extends StatelessWidget {
             children: [
               TextFormField(
                 controller: _nomAuteurController,
-                decoration: InputDecoration(labelText: 'Nom de l\'auteur'),
+                decoration: InputDecoration(
+                  labelText: 'Nom de l\'auteur',
+                  labelStyle: TextStyle(fontFamily: 'Kanit'), // Appliquer Kanit sur le label
+                ),
+                style: TextStyle(fontFamily: 'Kanit'), // Appliquer Kanit sur le texte du champ
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Veuillez entrer un nom d\'auteur';
@@ -37,7 +44,10 @@ class AjouterAuteurView extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
-                child: Text('Ajouter'),
+                child: Text(
+                  'Ajouter',
+                  style: TextStyle(fontFamily: 'Kanit'), // Appliquer Kanit sur le texte du bouton
+                ),
               ),
             ],
           ),

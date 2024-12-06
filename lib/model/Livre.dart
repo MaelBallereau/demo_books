@@ -1,57 +1,60 @@
-class Book {
-  String _title;
-  double _price;
-  int _authorid;
-  String _date;
+import '../../model/Auteur.dart';
 
-  // Constructor
-  Book({
-    required String title,
-    required double price,
-    required int authorid,
-    required String date,
-  })  : _title = title,
-        _price = price,
-        _authorid = authorid,
-        _date = date;
+class Livre {
+  late int? _idLivre;
+  late String _nomLivre;
+  late Auteur _auteur;
+  late String? _jacketPath;
 
-  // Empty constructor
-  Book.empty()
-      : _title = '',
-        _price = 0.0,
-        _authorid = 0,
-        _date = '';
+  // Constructeur
+  Livre({int? idLivre, required String nomLivre, required Auteur auteur, String? jacketPath})
+      : _idLivre = idLivre,
+        _nomLivre = nomLivre,
+        _auteur = auteur,
+        _jacketPath = jacketPath;
 
-  // Getters and setters
-  String get title => _title;
-  set title(String title) => _title = title;
+  // Getters
+  int? get idLivre => _idLivre;
 
-  double get price => _price;
-  set price(double price) => _price = price;
+  String get nomLivre => _nomLivre;
 
-  int get authorid => _authorid;
-  set authorid(int authorid) => _authorid = authorid;
+  Auteur get auteur => _auteur;
 
-  String get date => _date;
-  set date(String date) => _date = date;
+  String get nomAuteur => _auteur.nomAuteur;
 
-  // Factory method to create a Book from a map
-  factory Book.fromMap(Map<String, dynamic> map) {
-    return Book(
-      authorid: map['author_id'],
-      title: map['title'],
-      price: map['price'],
-      date: map['created_at'],
+  int? get idAuteur => _auteur.idAuteur;
+
+  String? get jacketPath => _jacketPath;
+
+  //Setters
+  set nomLivre(String value) {
+    if (value.isEmpty) {
+      throw ArgumentError('Le nom du livre ne peut pas être vide');
+    }
+    _nomLivre = value;
+  }
+
+  set jacketPath(String? value) {
+    _jacketPath = value;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'idLivre': _idLivre,
+      'nomLivre': _nomLivre,
+      'idAuteur': _auteur.idAuteur,
+      'jacket' : _jacketPath,
+    };
+  }
+
+  factory Livre.fromMap(Map<String, dynamic> map, Auteur auteur) {
+    return Livre(
+      idLivre: map['idLivre'],
+      nomLivre: map['nomLivre'],
+      auteur: auteur,
+      jacketPath: map['jacket'],
     );
   }
 
-  // Method to convert a Book to a map
-  Map<String, dynamic> toMap() {
-    return {
-      'author_id': _authorid,
-      'title': _title,
-      'price': _price,
-      'created_at': _date,
-    };
-  }
+
 }
