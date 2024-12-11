@@ -61,19 +61,10 @@ class LivreListView extends StatelessWidget {
                 jacketPath: livre.jacketPath, // Optionnel : Si vous avez un chemin pour l'image du livre, vous pouvez le passer ici
                 displayJacket: true, // Afficher l'image de couverture
                 onTap: () {
-                  // Action de tap sur la carte (modifier un livre pour les admins)
-                  if (userRole == 'admin') {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LivreDetailView(livre: livre)),
                     );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Vous n\'avez pas les droits pour modifier ce livre.'),
-                      ),
-                    );
-                  }
                 },
                 onEdit: () {
                   // Action de modification pour les admins
